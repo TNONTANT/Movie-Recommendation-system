@@ -9,6 +9,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 # (remove special char cuz it's make difficault for searching)
 def clean_title(title):
     # remove char that not in below reg
-    return re.sub("[^a-zA-Z]", " ", title)
+    return re.sub("[^a-zA-Z0-9]", " ", title)
 
 
