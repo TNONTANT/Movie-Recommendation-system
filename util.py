@@ -7,15 +7,30 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 # to clean movie title 
 # (remove special char cuz it's make difficault for searching)
-def clean_title(title):
+def clean_title(title)->str:
+    """
+    Description: This function is to replace the punctuation of input with space
+    input: Movie Title (str)
+    return: Cleaned movie title (str)"""
     # remove char that not in below reg
     return re.sub("[^a-zA-Z0-9]", " ", title)
 
 
 def recommend_movies(movie, rating, movie_id):
+    """
+    Description: this function is to calculate the reccomendation Score from provided data
+    Input: 
+        - Movie Dataframe,
+        - Rating Dataframe,
+        - movie_id
+    Output: Dataframe of movie with the score"""
+
+    # preprocessing
+    movie['cleaned title'] = movie['title'].apply(clean_title)
+
     # Find user similar to us
     ## user who like the same movie(movie_id) which rate the move more than 4
-    user_who_like_mov = rating[rating['movieId'] == 1]
+    user_who_like_mov = rating[rating['movieId'] == movie_id]
     user_who_like_mov_idx = user_who_like_mov[user_who_like_mov['rating'] > 4]['userId'].unique()
     ## movies that the user like (score > 4)
     rec_mov = rating[(rating['userId'].isin(user_who_like_mov_idx))&(rating['rating'] > 4)]
