@@ -2,5 +2,9 @@
 Machine Learning project movie recommendation system
 
 `util.py` Contain the function including 
-- recommendation
+- recommend_movie
+- clean_title
+* please read function instruction in the file
+
+`notebook.ipynb` Contain experiment 
   
